@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-import dotenv
+#import dotenv
+from dotenv import load_dotenv
 
-dotenv.read_dotenv()
+#dotenv.read_dotenv()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,15 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-=i_15s=v!)*xj*eosy^)5o%fe(oz76ge8bl6fs7574h24$wd4+'
+# SECRET_KEY = 'django-insecure-=i_15s=v!)*xj*eosy^)5o%fe(oz76ge8bl6fs7574h24$wd4+'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+# DEBUG = True
 DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -44,9 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'app_todolist.apps.AppTodolistConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'project_todolist.urls'
 
