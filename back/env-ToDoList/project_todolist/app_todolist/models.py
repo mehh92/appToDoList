@@ -17,12 +17,13 @@ class Utilisateur(AbstractBaseUser): # Définition d'un modèle Utilisateur pers
     email = models.EmailField(unique=True) # Champ email unique
     nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255)
-    #adresse = models.TextField(blank=True, null=True)
+
+    last_login = None  # Supprime le champ last_login
 
     objects = MyUserManager() # Utilisation du gestionnaire d'utilisateur personnalisé
 
-    USERNAME_FIELD = 'email' # Champ email utilisé pour l'authentification
-    REQUIRED_FIELDS = ['nom', 'prenom'] # Champs requis pour la création d'un utilisateur
+    # USERNAME_FIELD = 'email' # Champ email utilisé pour l'authentification (identification unique de l'utilisateur)
+    # REQUIRED_FIELDS = ['nom', 'prenom'] # Champs requis pour la création d'un utilisateur
 
     def __str__(self):
         return self.email
