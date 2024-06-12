@@ -4,7 +4,7 @@ from .models import Utilisateur, Todolist, Tache, Suggestion
 class UtilisateurSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utilisateur
-        fields = ['id', 'email', 'nom', 'prenom', 'adresse']
+        fields = ['id', 'email', 'nom', 'prenom']
 
 class TodolistSerializer(serializers.ModelSerializer):
     class Meta:

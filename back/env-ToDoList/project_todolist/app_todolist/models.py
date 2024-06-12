@@ -11,6 +11,12 @@ class MyUserManager(BaseUserManager): # Définition d'un gestionnaire d'utilisat
         user.set_password(password) # Hash le mot de passe de l'utilisateur 
         user.save(using=self._db) # Sauvegarde l'utilisateur dans la base de données
         return user
+    
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        return self.create_user(email, password, **extra_fields)
 
 # Modèle Utilisateur personnalisé
 class Utilisateur(AbstractBaseUser): # Définition d'un modèle Utilisateur personnalisé qui hérite de AbstractBaseUser.
@@ -22,8 +28,8 @@ class Utilisateur(AbstractBaseUser): # Définition d'un modèle Utilisateur pers
 
     objects = MyUserManager() # Utilisation du gestionnaire d'utilisateur personnalisé
 
-    # USERNAME_FIELD = 'email' # Champ email utilisé pour l'authentification (identification unique de l'utilisateur)
-    # REQUIRED_FIELDS = ['nom', 'prenom'] # Champs requis pour la création d'un utilisateur
+    USERNAME_FIELD = 'email' # Champ email utilisé pour l'authentification (identification unique de l'utilisateur)
+    REQUIRED_FIELDS = ['nom', 'prenom'] # Champs requis pour la création d'un utilisateur
 
     def __str__(self):
         return self.email
