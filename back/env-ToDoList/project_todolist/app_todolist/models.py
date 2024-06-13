@@ -46,8 +46,14 @@ class Todolist(models.Model):
 
 # Modèle Tache
 class Tache(models.Model):
+
+    STATUT_CHOICES = [
+        ('en_cours', 'En cours'),
+        ('terminee', 'Terminée'),
+    ]
+
     titre = models.CharField(max_length=255)
-    statut = models.CharField(max_length=50)
+    statut = models.CharField(max_length=50, choices=STATUT_CHOICES)
     todolist = models.ForeignKey(Todolist, on_delete=models.CASCADE, related_name='taches')
 
     def __str__(self):
