@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Todolist from './Components/Todolist/Todolist';
 import Auth from './Components/Auth/Auth';
 import Profil from './Components/Profil/Profil';
+import AddTodoList from './Components/AddTodoList/AddTodoList';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Auth />} />
         <Route path="/todolist" element={<Todolist />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="todolist/addtodolist" element={<AddTodoList />} />
         <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
       </Routes>
     </Router>

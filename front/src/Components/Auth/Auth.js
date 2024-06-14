@@ -45,15 +45,23 @@ export default function Auth() {
                 username: email,
                 password: password,
             });
-            localStorage.setItem('access', response.data.token);
-            localStorage.setItem('refresh', response.data.token);
-            console.log('Connexion réussie:', response.data);
-            navigate('/todolist');
+            console.log('Réponse de l\'API:', response.data);
+    
+            // Assurez-vous que les clés 'access' et 'refresh' existent dans la réponse
+            if (response.data.token) {
+                localStorage.setItem('access', response.data.token);
+                localStorage.setItem('refresh', response.data.token);
+                console.log('Connexion réussie:', response.data);
+                navigate('/todolist');
+            } else {
+                setError('Erreur lors de la connexion. Réponse inattendue du serveur.');
+            }
         } catch (error) {
             setError('Erreur lors de la connexion. Veuillez vérifier vos identifiants.');
-            console.error('Erreur de connexion:', error);
+            console.error('Erreur de connexion:', error.response ? error.response.data : error.message);
         }
     };
+    
 
     return (
         <div className="App">
